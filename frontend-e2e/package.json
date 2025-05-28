@@ -1,0 +1,10 @@
+{
+  "name": "@wms/frontend-e2e",
+  "version": "0.0.1",
+  "private": true,
+  "nx": {
+    "implicitDependencies": [
+      "@wms/frontend"
+    ]
+  }
+}
