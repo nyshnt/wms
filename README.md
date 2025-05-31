@@ -10,7 +10,7 @@ wms-backend/
 │   ├── config/             # Configuration files
 │   │   └── config.ts      # Environment and app configuration
 │   ├── graphql/           # GraphQL related files
-│   │   ├── schema.gql     # Auto-generated GraphQL schema
+│   │   ├── generatedSchema.gql     # Auto-generated GraphQL schema
 │   │   ├── graphql.ts     # Generated TypeScript types
 │   │   └── base.types.ts  # Base GraphQL types
 │   ├── migrations/        # Database migrations
@@ -99,12 +99,12 @@ Each module contains:
 - DTOs and other related files
 
 ### GraphQL
-- Schema is automatically generated in `src/graphql/schema.gql`
+- Schema is automatically generated in `src/graphql/generatedSchema.gql`
 - Playground available at http://localhost:3000/graphql when in development
 
 ## Prerequisites
 
-- Node.js (v14 or later)
+- Node.js (v22.6.0 or later)
 - MongoDB instance
 - npm or yarn
 
@@ -259,6 +259,3 @@ The application includes built-in error handling for:
 3. Run tests
 4. Submit pull request
 
-## License
-
-[UNLICENSED]
