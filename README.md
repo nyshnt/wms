@@ -1,90 +1,264 @@
-# Wms
+# WMS Backend
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+A NestJS-based backend service with GraphQL API and MongoDB integration.
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
-
-[Learn more about this workspace setup and its capabilities](https://nx.dev/nx-api/js?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
-
-## Finish your CI setup
-
-[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/6XvtkzaZxB)
-
-
-## Generate a library
-
-```sh
-npx nx g @nx/js:lib packages/pkg1 --publishable --importPath=@my-org/pkg1
-```
-
-## Run tasks
-
-To build the library use:
-
-```sh
-npx nx build pkg1
-```
-
-To run any task with Nx use:
-
-```sh
-npx nx <target> <project-name>
-```
-
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
-
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Versioning and releasing
-
-To version and release the library use
+## Project Structure
 
 ```
-npx nx release
+wms-backend/
+├── src/
+│   ├── config/             # Configuration files
+│   │   └── config.ts      # Environment and app configuration
+│   ├── graphql/           # GraphQL related files
+│   │   ├── schema.gql     # Auto-generated GraphQL schema
+│   │   ├── graphql.ts     # Generated TypeScript types
+│   │   └── base.types.ts  # Base GraphQL types
+│   ├── migrations/        # Database migrations
+│   │   ├── migrate.ts     # Migration runner
+│   │   └── 001-create-users.ts  # User collection migration
+│   ├── models/            # Database models
+│   │   └── user.model.ts  # User Mongoose model & GraphQL type
+│   ├── modules/           # Feature modules
+│   │   └── user/         # User module
+│   │       ├── dto/      # Data Transfer Objects
+│   │       │   └── create-user.input.ts  # User creation DTO
+│   │       ├── user.module.ts   # User module definition
+│   │       ├── user.resolver.ts # GraphQL resolvers
+│   │       └── user.service.ts  # Business logic
+│   ├── app.controller.ts  # App controller (if needed)
+│   ├── app.service.ts     # App service (if needed)
+│   ├── app.module.ts      # Main application module
+│   └── main.ts           # Application entry point
+├── test/                  # Test files
+│   └── jest-e2e.json     # E2E test configuration
+├── .env                   # Environment variables
+├── .env.example          # Example environment variables
+├── .eslintrc.js          # ESLint configuration
+├── .gitignore            # Git ignore rules
+├── .prettierrc           # Prettier configuration
+├── CONTRIBUTING.md       # Contribution guidelines
+├── nest-cli.json        # NestJS CLI configuration
+├── package.json         # Project dependencies and scripts
+├── README.md           # Project documentation
+├── tsconfig.json       # TypeScript configuration
+└── tsconfig.build.json # TypeScript build configuration
 ```
 
-Pass `--dry-run` to see what would happen without actually releasing the library.
+## Module Structure
 
-[Learn more about Nx release &raquo;](hhttps://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+Each feature module in the `modules` directory is self-contained and includes:
 
-## Keep TypeScript project references up to date
+1. **Module Definition** (`*.module.ts`)
+   - Defines module dependencies
+   - Configures providers
+   - Sets up imports/exports
 
-Nx automatically updates TypeScript [project references](https://www.typescriptlang.org/docs/handbook/project-references.html) in `tsconfig.json` files to ensure they remain accurate based on your project dependencies (`import` or `require` statements). This sync is automatically done when running tasks such as `build` or `typecheck`, which require updated references to function correctly.
+2. **Service** (`*.service.ts`)
+   - Contains business logic
+   - Handles data operations
+   - Implements domain rules
 
-To manually trigger the process to sync the project graph dependencies information to the TypeScript project references, run the following command:
+3. **Resolver** (`*.resolver.ts`)
+   - Defines GraphQL queries/mutations
+   - Maps GraphQL operations to services
+   - Handles GraphQL-specific logic
 
-```sh
-npx nx sync
+4. **DTOs** (`dto/*.ts`)
+   - Defines data transfer objects
+   - Implements input validation
+   - Specifies GraphQL inputs
+
+This modular architecture ensures:
+- Clear separation of concerns
+- Easy testing and maintenance
+- Scalable codebase
+- Module independence
+- Better code organization
+
+## Key Components
+
+### Models
+Models define both the MongoDB schema and GraphQL types. Located in `src/models/`.
+Example: `user.model.ts` defines:
+- Database schema using `@Prop()` decorators
+- GraphQL type using `@Field()` decorators
+- Document type for Mongoose
+
+### DTOs (Data Transfer Objects)
+DTOs handle input validation for GraphQL mutations and queries. Located in `src/modules/*/dto/`.
+Example: `create-user.input.ts` includes:
+- Input validation rules using class-validator
+- GraphQL input type definition
+
+### Modules
+Each feature is organized into a module. Located in `src/modules/`.
+Each module contains:
+- Module definition (*.module.ts)
+- Service layer (*.service.ts)
+- GraphQL resolvers (*.resolver.ts)
+- DTOs and other related files
+
+### GraphQL
+- Schema is automatically generated in `src/graphql/schema.gql`
+- Playground available at http://localhost:3000/graphql when in development
+
+## Prerequisites
+
+- Node.js (v14 or later)
+- MongoDB instance
+- npm or yarn
+
+## Environment Setup
+
+Create a `.env` file in the root directory:
+
+```env
+PORT=3000
+MONGODB_URI=mongodb://localhost:27017/localtestdb
 ```
 
-You can enforce that the TypeScript project references are always in the correct state when running in CI by adding a step to your CI job configuration that runs the following command:
+## Installation
 
-```sh
-npx nx sync:check
+```bash
+# Install dependencies
+npm install
 ```
 
-[Learn more about nx sync](https://nx.dev/reference/nx-commands#sync)
+## Running the Application
 
+```bash
+# Development mode
+npm run start:dev
 
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+# Production mode
+npm run start:prod
 
-## Install Nx Console
+# Debug mode
+npm run start:debug
+```
 
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
+## Database Migrations
 
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+Migrations are used to manage database schema changes.
 
-## Useful links
+```bash
+# Run migrations up
+npm run migrate:up
 
-Learn more:
+# Rollback migrations
+npm run migrate:down
+```
 
-- [Learn more about this workspace setup](https://nx.dev/nx-api/js?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+### Available Migrations:
+1. `001-create-users.ts`: Creates the users collection with:
+   - Email validation
+   - Required fields (email, name, password)
+   - Unique email index
+   - Timestamps
 
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+## API Examples
+
+### GraphQL Queries
+
+1. Fetch all users:
+```graphql
+query {
+  users {
+    _id
+    email
+    name
+    createdAt
+  }
+}
+```
+
+2. Fetch single user:
+```graphql
+query {
+  user(id: "userId") {
+    _id
+    email
+    name
+    createdAt
+  }
+}
+```
+
+### GraphQL Mutations
+
+1. Create new user:
+```graphql
+mutation {
+  createUser(input: {
+    email: "user@example.com"
+    name: "John Doe"
+    password: "securepassword"
+  }) {
+    _id
+    email
+    name
+    createdAt
+  }
+}
+```
+
+## Testing
+
+```bash
+# Unit tests
+npm run test
+
+# e2e tests
+npm run test:e2e
+
+# Test coverage
+npm run test:cov
+```
+
+## Development Guidelines
+
+1. **Models**:
+   - Use `@Prop()` for MongoDB schema properties
+   - Use `@Field()` for GraphQL exposed fields
+   - Sensitive data should not have `@Field()` decorator
+
+2. **DTOs**:
+   - Use class-validator decorators for validation
+   - Use meaningful validation messages
+   - Keep DTOs focused and specific
+
+3. **Services**:
+   - Handle business logic
+   - Interact with database through models
+   - Return clean data objects
+
+4. **Resolvers**:
+   - Handle GraphQL operations
+   - Use DTOs for input validation
+   - Map to service methods
+
+## Security Considerations
+
+1. Password fields are excluded from GraphQL responses
+2. Email uniqueness is enforced at database level
+3. Input validation is implemented using class-validator
+4. MongoDB connection string should be in environment variables
+
+## Error Handling
+
+The application includes built-in error handling for:
+- Database operations
+- Input validation
+- GraphQL operations
+- Migration processes
+
+## Contributing
+
+1. Create feature branch
+2. Make changes
+3. Run tests
+4. Submit pull request
+
+## License
+
+[UNLICENSED]
