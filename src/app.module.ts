@@ -62,6 +62,24 @@ import { CarMove, CarMoveSchema } from './models/car_move.model';
 import { CarmtxDtl, CarmtxDtlSchema } from './models/carmtx_dtl.model';
 import { CarmtxHdr, CarmtxHdrSchema } from './models/carmtx_hdr.model';
 import { Client, ClientSchema } from './models/client.model';
+import { ClientBingServTyp, ClientBingServTypSchema } from './models/client_bing_serv_typ.model';
+import { ClientBingUom, ClientBingUomSchema } from './models/client_bing_uom.model';
+import { ClientChrgSched, ClientChrgSchedSchema } from './models/client_chrg_sched.model';
+import { ClientGrp, ClientGrpSchema } from './models/client_grp.model';
+import { CmcyConvRate,CmcyConvRateSchema } from './models/cmcy_conv_rate.model';
+import {CmdConfig, CmdConfigSchema} from './models/cmd_config.model';
+import {CmdConfigArg, CmdConfigArgSchema} from "./models/cmd_config_arg.model"
+import { CmpDetails, CmpDetailsSchema } from './models/cmp_details.model';
+import { CmpHdr, CmpHdrSchema } from './models/cmp_hdr.model';
+import {  CnfrmBckServ,CnfrmBckServSchema} from "./models/cnfrm_bck_serv.model";
+import {CnfrmInsSrv ,CnfrmInsSrvSchema} from './models/cnfrm_ins_srv.model'
+import { CnfrmInvServ, CnfrmInvServSchema } from './models/cnfrm_inv_serv.model';
+import { CnfrmServVal, CnfrmServValSchema } from './models/cnfrm_serv_val.model';
+import { CntTmplDtl, CntTmplDtlSchema } from './models/cnt_tmpl_dtl.model';
+import { CntTmplHdr, CntTmplHdrSchema } from './models/cnt_tmpl_hdr.model';
+import { Cnthdr, CnthdrSchema } from './models/cnthdr.model';
+import { Cnthst, CnthstSchema } from './models/cnthst.model';
+import { Cntsch, CntschSchema } from './models/cntsch.model';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -140,7 +158,25 @@ import { Client, ClientSchema } from './models/client.model';
       {name: CarMove.name, schema: CarMoveSchema},
       {name: CarmtxDtl.name, schema: CarmtxDtlSchema},
       {name: CarmtxHdr.name, schema: CarmtxHdrSchema},
-      {name:Client.name, schema: ClientSchema}
+      {name:Client.name, schema: ClientSchema},
+      {name:ClientBingServTyp.name, schema: ClientBingServTypSchema},
+      {name:ClientBingUom.name, schema: ClientBingUomSchema},
+      {name:ClientChrgSched.name, schema: ClientChrgSchedSchema},
+      {name:ClientGrp.name, schema:ClientGrpSchema},
+      {name:CmcyConvRate.name, schema:CmcyConvRateSchema},
+      {name:CmdConfig.name, schema: CmdConfigSchema},
+      {name:CmdConfigArg.name, schema: CmdConfigArgSchema},
+      {name:CmpDetails.name, schema: CmpDetailsSchema},
+      {name:CmpHdr.name, schema:CmpHdrSchema},
+      {name:CnfrmBckServ.name, schema:CnfrmBckServSchema},
+      {name:CnfrmInsSrv.name, schema:CnfrmInsSrvSchema},
+      {name:CnfrmInvServ.name, schema:CnfrmInvServSchema},
+      {name:CnfrmServVal.name, schema: CnfrmServValSchema},
+      {name:CntTmplDtl.name, schema: CntTmplDtlSchema},
+      {name:CntTmplHdr.name, schema: CntTmplHdrSchema},
+      {name:Cnthdr.name, schema:CnthdrSchema},
+      {name:Cnthst.name, schema:CnthstSchema},
+      {name:Cntsch.name, schema:CntschSchema}
     ]),
   ],
   controllers: [AppController],
