@@ -80,6 +80,53 @@ import { CntTmplHdr, CntTmplHdrSchema } from './models/cnt_tmpl_hdr.model';
 import { Cnthdr, CnthdrSchema } from './models/cnthdr.model';
 import { Cnthst, CnthstSchema } from './models/cnthst.model';
 import { Cntsch, CntschSchema } from './models/cntsch.model';
+import { Cnttyp, CnttypSchema } from './models/cnttyp.model';
+import { Cntwrk, CntwrkSchema } from './models/cntwrk.model';
+import { Cntzon, CntzonSchema } from './models/cntzon.model';
+import { Codmst, CodmstSchema } from './models/codmst.model';
+import { CriteriaMst, CriteriaMstSchema } from './models/criteria_mst.model';
+import { CrncyMat, CrncyMatSchema } from './models/crncy_mat.model';
+import { CstWhDstLoc, CstWhDstLocSchema } from './models/cst_wh_dst_loc.model';
+import { CstWhPutToLoc, CstWhPutToLocSchema } from './models/cst_wh_put_to_loc.model';
+import { CstWhPutToLocField, CstWhPutToLocFieldSchema } from './models/cst_wh_put_to_loc_field.model';
+import { CstWhSchedule, CstWhScheduleSchema } from './models/cst_wh_schedule.model';
+import { CstmsCnsgnmnt, CstmsCnsgnmntSchema } from './models/cstms_cnsgnmnt.model';
+import { CstmsCnsgnmntDft, CstmsCnsgnmntDftSchema } from './models/cstms_cnsgnmnt_dft.model';
+import { Cstmst, CstmstSchema } from './models/cstmst.model';
+import { CtnSelectCri, CtnSelectCriSchema } from './models/ctn_select_cri.model';
+import { Ctnmst, CtnmstSchema } from './models/ctnmst.model';
+import { CtryMst, CtryMstSchema } from './models/ctry_mst.model';
+import { CtyPsz, CtyPszSchema } from './models/cty_psz.model';
+import { CurTrirAct, CurTrirActSchema } from './models/cur_trir_act.model';
+import { DashModDef, DashModDefSchema } from './models/dash_mod_def.model';
+import { DashTabModConfig, DashTabModConfigSchema } from './models/dash_tab_mod_config.model';
+import { DashTabAssign, DashTabAssignSchema } from './models/dash_tab_assign.model';
+import { DashTabs, DashTabsSchema } from './models/dash_tabs.model';
+import { DataAccsGrp, DataAccsGrpSchema } from './models/data_accs_grp.model';
+import { DataAccsGrpSup, DataAccsGrpSupSchema } from './models/data_accs_grp_sup.model';
+import { Dda, DdaSchema } from './models/dda.model';
+import { DdaAction, DdaActionSchema } from './models/dda_action.model';
+import { DdaChild, DdaChildSchema } from './models/dda_child.model';
+import { DdaField, DdaFieldSchema } from './models/dda_field.model';
+import { DdaFieldMap, DdaFieldMapSchema } from './models/dda_field_map.model';
+import { DdaFitrGrp, DdaFitrGrpSchema } from './models/dda_fitr_grp.model';
+import { DdaMst, DdaMstSchema } from './models/dda_mst.model';
+import { DefServ, DefServSchema } from './models/def_serv.model';
+import { DevWrkare, DevWrkareSchema } from './models/dev_wrkare.model';
+import { DevcisFunction, DevcisFunctionSchema } from './models/devcis_function.model';
+import { DevcisFunctionDtl, DevcisFunctionDtlSchema } from './models/devcis_function_dtl.model';
+import { Devmst, DevmstSchema } from './models/devmst.model';
+import { DevmstReader, DevmstReaderSchema } from './models/devmst_reader.model';
+import { Distro, DistroSchema } from './models/distro.model';
+import { DistroTyp, DistroTypSchema } from './models/distro_typ.model';
+import { DocLblfmt, DocLblfmtSchema } from './models/doc_lblfmt.model';
+import { DocRptId, DocRptIdSchema } from './models/doc_rpt_id.model';
+import { DocRule, DocRuleSchema } from './models/doc_rule.model';
+import { DocRuleFld, DocRuleFldSchema } from './models/doc_rule_fld.model';
+import { DocRuleLvl, DocRuleLvlSchema } from './models/doc_rule_lvl.model';
+import { DocTyp, DocTypSchema } from './models/doc_typ.model';
+import { DocTypArg, DocTypArgSchema } from './models/doc_typ_arg.model';
+import { DocTypLvl, DocTypLvlSchema } from './models/doc_typ_lvl.model';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -176,7 +223,54 @@ import { Cntsch, CntschSchema } from './models/cntsch.model';
       {name:CntTmplHdr.name, schema: CntTmplHdrSchema},
       {name:Cnthdr.name, schema:CnthdrSchema},
       {name:Cnthst.name, schema:CnthstSchema},
-      {name:Cntsch.name, schema:CntschSchema}
+      {name:Cntsch.name, schema:CntschSchema},
+      {name:Cnttyp.name, schema:CnttypSchema},
+      {name:Cntwrk.name, schema:CntwrkSchema},
+      {name:Cntzon.name, schema:CntzonSchema},
+      {name:Codmst.name, schema:CodmstSchema},
+      {name:CriteriaMst.name, schema:CriteriaMstSchema},
+      {name:CrncyMat.name, schema:CrncyMatSchema},
+      {name:CstWhDstLoc.name, schema:CstWhDstLocSchema},
+      {name:CstWhPutToLoc.name, schema:CstWhPutToLocSchema},
+      {name:CstWhPutToLocField.name, schema:CstWhPutToLocFieldSchema},
+      {name:CstWhSchedule.name, schema:CstWhScheduleSchema},
+      {name:CstmsCnsgnmnt.name, schema:CstmsCnsgnmntSchema},
+      {name:CstmsCnsgnmntDft.name, schema:CstmsCnsgnmntDftSchema},
+      {name:Cstmst.name,schema:CstmstSchema},
+      {name:CtnSelectCri.name,schema:CtnSelectCriSchema},
+      {name:Ctnmst.name, schema: CtnmstSchema},
+      {name:CtryMst.name, schema:CtryMstSchema},
+      {name:CtyPsz.name, schema:CtyPszSchema},
+      {name:CurTrirAct.name, schema:CurTrirActSchema},
+      {name:DashModDef.name, schema:DashModDefSchema},
+      {name:DashTabModConfig.name, schema:DashTabModConfigSchema},
+      {name:DashTabAssign.name, schema:DashTabAssignSchema},
+      {name:DashTabs.name, schema: DashTabsSchema},
+      {name:DataAccsGrp.name, schema: DataAccsGrpSchema},
+      {name: DataAccsGrpSup.name, schema:DataAccsGrpSupSchema},
+      {name:Dda.name, schema:DdaSchema},
+      {name:DdaAction.name, schema: DdaActionSchema},
+      {name: DdaChild.name, schema: DdaChildSchema},
+      {name:DdaField.name, schema:DdaFieldSchema},
+      {name:DdaFieldMap.name, schema:DdaFieldMapSchema},
+      {name:DdaFitrGrp.name, schema:DdaFitrGrpSchema},
+      {name:DdaMst.name, schema:DdaMstSchema},
+      {name:DefServ.name, schema:DefServSchema},
+      {name:DevWrkare.name, schema:DevWrkareSchema},
+      {name:DevcisFunction.name, schema:DevcisFunctionSchema},
+      {name:DevcisFunctionDtl.name, schema:DevcisFunctionDtlSchema},
+      {name:Devmst.name, schema:DevmstSchema},
+      {name:DevmstReader.name, schema:DevmstReaderSchema},
+      {name:Distro.name, schema: DistroSchema},
+      {name:DistroTyp.name, schema: DistroTypSchema},
+      {name:DocLblfmt.name, schema:DocLblfmtSchema},
+      {name:DocRptId.name, schema:DocRptIdSchema},
+      {name:DocRule.name, schema:DocRuleSchema},
+      {name:DocRuleFld.name, schema: DocRuleFldSchema},
+      {name:DocRuleLvl.name, schema: DocRuleLvlSchema},
+      {name:DocTyp.name, schema:DocTypSchema},
+      {name:DocTypArg.name, schema:DocTypArgSchema},
+      {name:DocTypLvl.name, schema:DocTypLvlSchema}
     ]),
   ],
   controllers: [AppController],
